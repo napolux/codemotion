@@ -1,6 +1,6 @@
 # Astro vs Next.js: due filosofie per costruire il web moderno
 
-Il panorama frontend degli ultimi anni è esploso. React, Vue, Svelte, Solid, meta-framework come Next.js, Nuxt e Remix — e poi Astro, un approccio che rompe le regole del gioco in modo silenzioso ma efficace.
+Il panorama frontend degli ultimi anni è esploso. [React](https://react.dev/), [Vue](https://vuejs.org/), [Svelte](https://svelte.dev/), [Solid](https://www.solidjs.com/), meta-framework come [Next.js](https://nextjs.org/), [Nuxt](https://nuxt.com/) e [Remix](https://remix.run/) — e poi [Astro](https://astro.build/), un approccio che rompe le regole del gioco in modo silenzioso ma efficace.
 
 In questo ecosistema ricco e spesso rumoroso è facile cadere in una trappola: usare sempre lo stesso strumento, qualunque sia il problema da risolvere. Next.js funziona? Sì, quasi sempre. Ma "funziona" non significa che sia sempre la scelta giusta.
 
@@ -24,7 +24,7 @@ Astro e Next.js partono da risposte diverse a questo problema.
 
 ## Next.js: il fullstack framework di riferimento per React
 
-Next.js è sviluppato e mantenuto da Vercel. Negli anni è cresciuto fino a diventare molto più di un semplice layer sopra React: è oggi una piattaforma fullstack che copre rendering, routing, gestione dei dati e deployment in modo integrato.
+Next.js è sviluppato e mantenuto da [Vercel](https://vercel.com/). Negli anni è cresciuto fino a diventare molto più di un semplice layer sopra React: è oggi una piattaforma fullstack che copre rendering, routing, gestione dei dati e deployment in modo integrato.
 
 ### Rendering modes
 
@@ -218,7 +218,7 @@ Questo livello di controllo granulare è qualcosa che Next.js non offre nativame
 
 ### Framework agnostic
 
-Un altro punto di forza di Astro spesso sottovalutato: non sei vincolato a React. Puoi usare componenti Vue, Svelte, Solid, Lit — o anche mescolare framework diversi nella stessa pagina.
+Un altro punto di forza di Astro spesso sottovalutato: non sei vincolato a React. Puoi usare componenti Vue, Svelte, Solid, [Lit](https://lit.dev/) — o anche mescolare framework diversi nella stessa pagina.
 
 ```astro
 ---
@@ -250,9 +250,27 @@ Mettiamo tutto insieme con un esempio concreto. Dobbiamo costruire una landing p
 
 Le testimonianze sono un caso interessante: vengono da un CMS esterno, cambiano raramente, e non hanno bisogno di interattività. È esattamente il tipo di dato che i due framework gestiscono in modo molto diverso.
 
+Una nota pratica: negli esempi di codice che seguono, l'articolo mostra una `fetch` verso un'API esterna (`https://api.example.com/testimonials`). Nel codice reale dei due progetti di esempio, però, non c'è nessuna API — le testimonianze vengono da un semplice file JSON locale (`src/data/testimonials.json`) importato direttamente nel componente. Il concetto è lo stesso: i dati arrivano al browser già renderizzati come HTML, senza JavaScript. L'unica differenza è la sorgente — un file locale invece di un endpoint remoto. Abbiamo anche semplificato l'hero, sostituendo il video di background con un gradiente CSS, per mantenere gli esempi leggeri e facili da eseguire senza dipendenze esterne.
+
 ### Fetch dei dati: Astro
 
-In Astro, il fetch avviene nel frontmatter — la sezione delimitata dai `---` in cima al file. Quel codice gira **solo sul server** (o a build time), mai nel browser.
+Prima di guardare il codice, vediamo come si crea un progetto Astro. Il setup è veloce: basta un comando nel terminale per avere un progetto funzionante.
+
+```bash
+npm create astro@latest my-project
+```
+
+La CLI interattiva ti guida nella scelta del template e delle opzioni base. Una volta creato il progetto, se hai bisogno di componenti React — come nel nostro esempio con il pricing toggle e il form — aggiungi l'integrazione con un altro comando:
+
+```bash
+npx astro add react
+```
+
+Astro installa automaticamente le dipendenze necessarie (`react`, `react-dom`, `@astrojs/react`) e aggiorna la configurazione in `astro.config.mjs`. Non devi toccare nulla a mano. Questo approccio modulare è una delle caratteristiche di Astro: parti leggero e aggiungi solo quello che ti serve, quando ti serve.
+
+A questo punto il progetto è pronto. La struttura è semplice: le pagine vivono in `src/pages/`, i componenti in `src/components/`, e ogni file `.astro` ha un frontmatter delimitato da `---` dove scrivere logica server-side in JavaScript o TypeScript.
+
+Ed è proprio nel frontmatter che avviene il fetch dei dati. Quel codice gira **solo sul server** (o a build time), mai nel browser.
 
 ```astro
 ---
@@ -376,11 +394,11 @@ Per questa pagina specifica la differenza di performance è probabilmente trascu
 
 La performance non è l'unico asse di confronto. Vale la pena considerare anche l'esperienza di sviluppo quotidiana.
 
-**Next.js** ha un ecosistema maturo, documentazione eccellente, e una community enorme. Se conosci React, sei già a metà strada. Il modello mentale dei Server Components richiede un po' di adattamento iniziale, ma una volta acquisito è molto potente. La CLI, il dev server con hot reload, e l'integrazione nativa con Vercel sono tra i migliori del settore. TypeScript è first-class citizen. L'ecosistema di librerie compatibili è praticamente illimitato.
+**Next.js** ha un ecosistema maturo, documentazione eccellente, e una community enorme. Se conosci React, sei già a metà strada. Il modello mentale dei Server Components richiede un po' di adattamento iniziale, ma una volta acquisito è molto potente. La CLI, il dev server con hot reload, e l'integrazione nativa con Vercel sono tra i migliori del settore. [TypeScript](https://www.typescriptlang.org/) è first-class citizen. L'ecosistema di librerie compatibili è praticamente illimitato.
 
 **Astro** ha una curva di apprendimento sorprendentemente bassa per chi viene dal mondo HTML/CSS. La sintassi dei file `.astro` è familiare: un frontmatter JavaScript e template HTML con espressioni. La documentazione è eccellente e ben organizzata. Il punto di attenzione è il modello Islands: devi pensare in anticipo a quali parti della pagina sono statiche e quali no. Questo richiede un cambio di approccio rispetto allo sviluppo React tradizionale, ma tende a produrre architetture più pulite.
 
-Un aspetto spesso sottovalutato: Astro si integra facilmente con CMS headless come Contentful, Sanity, Storyblok o anche file Markdown locali. È una scelta comune per siti editoriali gestiti da team non tecnici.
+Un aspetto spesso sottovalutato: Astro si integra facilmente con CMS headless come [Contentful](https://www.contentful.com/), [Sanity](https://www.sanity.io/), [Storyblok](https://www.storyblok.com/) o anche file Markdown locali. È una scelta comune per siti editoriali gestiti da team non tecnici.
 
 ---
 

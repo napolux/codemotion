@@ -1,0 +1,102 @@
+---
+import PricingToggle from "../components/PricingToggle.jsx"
+import NewsletterForm from "../components/NewsletterForm.jsx"
+
+// In un progetto reale, questo fetch avverrebbe verso un'API esterna.
+// Qui importiamo dati locali per semplicità.
+import testimonials from "../data/testimonials.json"
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landing Page — Astro Example</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: system-ui, -apple-system, sans-serif; color: #333; line-height: 1.6; }
+      section { padding: 4rem 2rem; max-width: 960px; margin: 0 auto; }
+
+      .hero {
+        text-align: center;
+        padding: 6rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        max-width: 100%;
+      }
+      .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+      .hero p { font-size: 1.25rem; opacity: 0.9; }
+
+      .features { background: #f9f9f9; max-width: 100%; }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 960px;
+        margin: 2rem auto 0;
+      }
+      .feature-card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      .feature-card h3 { margin-bottom: 0.5rem; }
+
+      .testimonials blockquote {
+        border-left: 4px solid #764ba2;
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        background: #f9f9f9;
+        border-radius: 0 8px 8px 0;
+      }
+      .testimonials cite { color: #666; font-style: normal; font-size: 0.9rem; }
+
+      h2 { text-align: center; margin-bottom: 2rem; font-size: 2rem; }
+    </style>
+  </head>
+  <body>
+
+    <section class="hero">
+      <h1>Il nostro prodotto</h1>
+      <p>La soluzione più veloce per il tuo team.</p>
+    </section>
+
+    <section class="features">
+      <h2>Funzionalità principali</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Velocità</h3>
+          <p>Performance ottimizzate per ogni dispositivo, con tempi di caricamento sotto il secondo.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Sicurezza</h3>
+          <p>Crittografia end-to-end e conformità GDPR inclusa in ogni piano.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Scalabilità</h3>
+          <p>Dalla startup all'enterprise, cresce con te senza compromessi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing">
+      <h2>Prezzi chiari, senza sorprese</h2>
+      <!-- Caricato solo quando entra nel viewport -->
+      <PricingToggle client:visible />
+    </section>
+
+    <!-- Le testimonianze sono HTML puro: zero JavaScript -->
+    <section class="testimonials">
+      <h2>Cosa dicono di noi</h2>
+      {testimonials.map(t => (
+        <blockquote>
+          <p>{t.quote}</p>
+          <cite>— {t.author}, {t.company}</cite>
+        </blockquote>
+      ))}
+    </section>
+
+    <section class="newsletter">
+      <h2>Resta aggiornato</h2>
+      <!-- Idratato subito: l'utente potrebbe compilarlo in cima alla pagina -->
+      <NewsletterForm client:load />
+    </section>
+
+  </body>
+</html>

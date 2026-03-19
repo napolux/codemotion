@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "quote": "Da quando usiamo questo prodotto, il nostro team ha raddoppiato la produttività. Non potremmo più farne a meno.",
+    "author": "Marco Rossi",
+    "company": "TechFlow Italia"
+  },
+  {
+    "id": 2,
+    "quote": "L'integrazione è stata semplicissima. In meno di un'ora eravamo operativi. Supporto clienti eccezionale.",
+    "author": "Giulia Bianchi",
+    "company": "StartupLab"
+  },
+  {
+    "id": 3,
+    "quote": "Abbiamo valutato diverse soluzioni e questa è di gran lunga la più veloce e affidabile sul mercato.",
+    "author": "Alessandro Conti",
+    "company": "Digital Solutions Srl"
+  },
+  {
+    "id": 4,
+    "quote": "Il rapporto qualità-prezzo è imbattibile. Consiglio a qualsiasi team che vuole scalare velocemente.",
+    "author": "Sara Moretti",
+    "company": "CloudBase"
+  }
+]

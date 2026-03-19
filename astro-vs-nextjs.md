@@ -16,9 +16,11 @@ Il web moderno ha un problema di peso. Negli ultimi dieci anni, la quantità med
 
 Questo ha conseguenze reali: tempi di caricamento più lunghi, esperienze peggiori su dispositivi di fascia media o bassa, Core Web Vitals compromessi, e ranking SEO penalizzati.
 
-Il problema non è React in sé. Il problema è il modello di sviluppo che si è affermato: costruiamo app React complete anche quando stiamo costruendo siti che sono, fondamentalmente, contenuto.
+Il problema non è React in sé. Il problema è il modello di sviluppo che si è affermato: costruiamo app React complete anche quando stiamo costruendo siti che sono, fondamentalmente, contenuto. Un blog, una pagina marketing, una documentazione tecnica — non hanno bisogno di un runtime JavaScript che gira nel browser per mostrare testo e immagini. Eppure è esattamente quello che succede quando usi un framework pensato per applicazioni interattive per costruire qualcosa che è, nella sostanza, statico.
 
-Astro e Next.js partono da risposte diverse a questo problema.
+È un po' come usare un camion per fare la spesa: funziona, ci arrivi al supermercato, ma stai portando con te un sacco di peso inutile.
+
+Astro e Next.js partono da risposte diverse a questo problema. Next.js dice: "ti do tutti gli strumenti per costruire qualsiasi cosa, e poi ottimizziamo insieme". Astro dice: "partiamo da zero JavaScript e aggiungiamo solo quello che serve davvero". Due filosofie opposte, entrambe legittime — ma con conseguenze molto diverse sul risultato finale.
 
 ---
 
@@ -140,6 +142,16 @@ export default function NewsletterForm() {
 
 Questo livello di integrazione tra frontend e backend è uno dei punti di forza più evidenti di Next.js per chi costruisce prodotti complessi. Un'unica codebase, un unico deploy, nessun context switch.
 
+### Setup del progetto
+
+Creare un progetto Next.js è questione di un comando:
+
+```bash
+npx create-next-app@latest my-app
+```
+
+La CLI ti chiede se vuoi TypeScript, ESLint e la struttura con `src/` directory — tutte opzioni che puoi accettare o rifiutare. In pochi secondi hai un progetto funzionante con App Router, dev server con hot reload e tutto il necessario per iniziare a costruire.
+
 ---
 
 ## Astro: meno JavaScript, più performance
@@ -236,6 +248,26 @@ import SvelteModal from "../components/Modal.svelte"   // Svelte
 
 Per un team che migra gradualmente da un framework a un altro, o che ha competenze miste, questa flessibilità è preziosa. E per chi vuole sperimentare con Svelte o Solid senza riscrivere tutto, è un'opzione concreta.
 
+### Setup del progetto
+
+Creare un progetto Astro è veloce: basta un comando nel terminale per avere tutto pronto.
+
+```bash
+npm create astro@latest my-project
+```
+
+La CLI interattiva ti guida nella scelta del template e delle opzioni base. Una volta creato il progetto, se hai bisogno di componenti interattivi — come nel nostro esempio con il pricing toggle e il form — aggiungi l'integrazione con il framework che preferisci. Per React, ad esempio:
+
+```bash
+npx astro add react
+```
+
+Astro installa automaticamente le dipendenze necessarie (`react`, `react-dom`, `@astrojs/react`) e aggiorna la configurazione in `astro.config.mjs`. Non devi toccare nulla a mano. Lo stesso vale per Vue (`astro add vue`), Svelte (`astro add svelte`) o qualsiasi altra integrazione supportata.
+
+Questo approccio modulare è una delle caratteristiche distintive di Astro: parti leggero e aggiungi solo quello che ti serve, quando ti serve. Non porti con te il peso di un runtime che non usi.
+
+La struttura del progetto è semplice e prevedibile: le pagine vivono in `src/pages/`, i componenti in `src/components/`, e ogni file `.astro` ha un frontmatter delimitato da `---` dove puoi scrivere logica server-side in JavaScript o TypeScript. Se hai mai lavorato con file Markdown con frontmatter YAML, il concetto ti sarà familiare — solo che qui il frontmatter è codice eseguibile.
+
 ---
 
 ## Confronto diretto: una pagina marketing
@@ -254,23 +286,7 @@ Una nota pratica: negli esempi di codice che seguono, l'articolo mostra una `fet
 
 ### Fetch dei dati: Astro
 
-Prima di guardare il codice, vediamo come si crea un progetto Astro. Il setup è veloce: basta un comando nel terminale per avere un progetto funzionante.
-
-```bash
-npm create astro@latest my-project
-```
-
-La CLI interattiva ti guida nella scelta del template e delle opzioni base. Una volta creato il progetto, se hai bisogno di componenti React — come nel nostro esempio con il pricing toggle e il form — aggiungi l'integrazione con un altro comando:
-
-```bash
-npx astro add react
-```
-
-Astro installa automaticamente le dipendenze necessarie (`react`, `react-dom`, `@astrojs/react`) e aggiorna la configurazione in `astro.config.mjs`. Non devi toccare nulla a mano. Questo approccio modulare è una delle caratteristiche di Astro: parti leggero e aggiungi solo quello che ti serve, quando ti serve.
-
-A questo punto il progetto è pronto. La struttura è semplice: le pagine vivono in `src/pages/`, i componenti in `src/components/`, e ogni file `.astro` ha un frontmatter delimitato da `---` dove scrivere logica server-side in JavaScript o TypeScript.
-
-Ed è proprio nel frontmatter che avviene il fetch dei dati. Quel codice gira **solo sul server** (o a build time), mai nel browser.
+In Astro, il fetch avviene nel frontmatter — la sezione delimitata dai `---` che abbiamo visto nel setup. Quel codice gira **solo sul server** (o a build time), mai nel browser.
 
 ```astro
 ---
@@ -392,13 +408,33 @@ Per questa pagina specifica la differenza di performance è probabilmente trascu
 
 ## Developer Experience a confronto
 
-La performance non è l'unico asse di confronto. Vale la pena considerare anche l'esperienza di sviluppo quotidiana.
+La performance non è l'unico asse di confronto. Vale la pena considerare anche l'esperienza di sviluppo quotidiana — perché il framework con cui lavori ogni giorno incide direttamente sulla tua produttività e sulla qualità del risultato finale.
 
-**Next.js** ha un ecosistema maturo, documentazione eccellente, e una community enorme. Se conosci React, sei già a metà strada. Il modello mentale dei Server Components richiede un po' di adattamento iniziale, ma una volta acquisito è molto potente. La CLI, il dev server con hot reload, e l'integrazione nativa con Vercel sono tra i migliori del settore. [TypeScript](https://www.typescriptlang.org/) è first-class citizen. L'ecosistema di librerie compatibili è praticamente illimitato.
+### Next.js
 
-**Astro** ha una curva di apprendimento sorprendentemente bassa per chi viene dal mondo HTML/CSS. La sintassi dei file `.astro` è familiare: un frontmatter JavaScript e template HTML con espressioni. La documentazione è eccellente e ben organizzata. Il punto di attenzione è il modello Islands: devi pensare in anticipo a quali parti della pagina sono statiche e quali no. Questo richiede un cambio di approccio rispetto allo sviluppo React tradizionale, ma tende a produrre architetture più pulite.
+Se conosci React, con Next.js sei già a metà strada. L'ecosistema è maturo, la documentazione è eccellente e la community è enorme — il che significa che per quasi ogni problema che incontri, qualcuno ha già trovato una soluzione.
 
-Un aspetto spesso sottovalutato: Astro si integra facilmente con CMS headless come [Contentful](https://www.contentful.com/), [Sanity](https://www.sanity.io/), [Storyblok](https://www.storyblok.com/) o anche file Markdown locali. È una scelta comune per siti editoriali gestiti da team non tecnici.
+Il modello mentale dei Server Components richiede un po' di adattamento iniziale: devi abituarti a ragionare su quali componenti girano sul server e quali nel browser. Ma una volta acquisito, è un modello potente che ti permette di scrivere meno codice client-side senza sacrificare l'interattività.
+
+Il dev server con hot reload è veloce e affidabile. [TypeScript](https://www.typescriptlang.org/) è first-class citizen: i tipi vengono generati automaticamente per le route e i parametri. L'integrazione nativa con Vercel rende il deploy un non-problema — un `git push` e il sito è online. Ma puoi fare deploy anche su altre piattaforme: Docker, Node.js standalone, o qualsiasi provider che supporti le serverless functions.
+
+L'ecosistema di librerie compatibili è praticamente illimitato. Autenticazione, ORM, state management, UI kit — se esiste per React, funziona con Next.js. Questo è un vantaggio concreto quando lavori in team o su progetti di lunga durata: non devi reinventare la ruota.
+
+### Astro
+
+Astro ha una curva di apprendimento sorprendentemente bassa, soprattutto se vieni dal mondo HTML/CSS. La sintassi dei file `.astro` è familiare: un frontmatter JavaScript in cima e template HTML con espressioni sotto. Non c'è un paradigma nuovo da imparare — è il web che conosci già, con un po' di superpotere in più.
+
+La documentazione è eccellente e ben organizzata, con guide pratiche che ti portano da zero a un sito funzionante in pochi minuti. Il dev server è rapido e la build è tipicamente molto veloce, anche su progetti con centinaia di pagine.
+
+Il punto di attenzione è il modello Islands: devi pensare in anticipo a quali parti della pagina sono statiche e quali interattive. Questo richiede un cambio di mentalità rispetto allo sviluppo React tradizionale, dove tutto è un componente e tutto è potenzialmente interattivo. Ma è un vincolo che tende a produrre architetture più pulite e risultati più performanti — ti costringe a farti la domanda giusta: "questo componente ha davvero bisogno di JavaScript nel browser?"
+
+Un aspetto spesso sottovalutato: Astro si integra facilmente con CMS headless come [Contentful](https://www.contentful.com/), [Sanity](https://www.sanity.io/), [Storyblok](https://www.storyblok.com/) o anche file Markdown locali. Per siti editoriali gestiti da team non tecnici, questa è spesso la killer feature — il content team lavora nel CMS, lo sviluppatore definisce i template, e Astro genera pagine statiche velocissime senza che nessuno debba toccare codice.
+
+### Debugging e tooling
+
+Su entrambi i framework, il debugging è un'esperienza solida. Next.js si integra nativamente con i React DevTools e offre messaggi di errore dettagliati con overlay nel browser. Astro mostra errori chiari nel terminale e nel browser, con stack trace che puntano direttamente al file `.astro` sorgente — non al codice compilato.
+
+Un punto a favore di Astro: quando qualcosa non funziona, il modello mentale è più semplice da debuggare. Se un componente non si idrata, sai esattamente dove guardare — la direttiva `client:*` nel template. In Next.js, capire perché un componente sta girando sul server o sul client può richiedere qualche passaggio in più, soprattutto nei casi limite tra Server e Client Components.
 
 ---
 

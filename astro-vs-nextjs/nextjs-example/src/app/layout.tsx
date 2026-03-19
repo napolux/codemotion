@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Landing Page — Next.js Example",
+  title: "Landing Page - Next.js Example",
   description: "Esempio di landing page con Next.js",
 };
 

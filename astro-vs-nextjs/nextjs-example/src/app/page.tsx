@@ -24,15 +24,23 @@ export default function LandingPage() {
         <div className="features-grid">
           <div className="feature-card">
             <h3>Velocità</h3>
-            <p>Performance ottimizzate per ogni dispositivo, con tempi di caricamento sotto il secondo.</p>
+            <p>
+              Performance ottimizzate per ogni dispositivo, con tempi di
+              caricamento sotto il secondo.
+            </p>
           </div>
           <div className="feature-card">
             <h3>Sicurezza</h3>
-            <p>Crittografia end-to-end e conformità GDPR inclusa in ogni piano.</p>
+            <p>
+              Crittografia end-to-end e conformità GDPR inclusa in ogni piano.
+            </p>
           </div>
           <div className="feature-card">
             <h3>Scalabilità</h3>
-            <p>Dalla startup all&apos;enterprise, cresce con te senza compromessi.</p>
+            <p>
+              Dalla startup all&apos;enterprise, cresce con te senza
+              compromessi.
+            </p>
           </div>
         </div>
       </section>
@@ -49,7 +57,9 @@ export default function LandingPage() {
         {(testimonials as Testimonial[]).map((t) => (
           <blockquote key={t.id}>
             <p>{t.quote}</p>
-            <cite>— {t.author}, {t.company}</cite>
+            <cite>
+              - {t.author}, {t.company}
+            </cite>
           </blockquote>
         ))}
       </section>

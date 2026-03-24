@@ -363,6 +363,8 @@ const testimonials = await res.json()
 
 Il risultato nel browser è HTML puro. Le testimonianze sono già lì, nel markup, senza una singola riga di JavaScript eseguita per mostrarle. `PricingToggle` e `NewsletterForm` sono le uniche due isole interattive, e ognuna viene idratata nei propri tempi.
 
+![Le islands di Astro evidenziate sulla landing page di esempio](images/astro-islands-screenshot.png)
+
 ### Fetch dei dati: Next.js
 
 In Next.js con l'App Router, il fetch avviene direttamente nei Server Components: funzioni `async` che girano sul server e passano i dati ai componenti figli.

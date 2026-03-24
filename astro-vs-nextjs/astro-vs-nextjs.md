@@ -61,6 +61,8 @@ export default async function BlogPage() {
 
 ### React Server Components
 
+![Architettura React Server Components in Next.js](images/nextjs-rsc-architecture.png)
+
 Con l'introduzione dell'App Router (Next.js 13+), il framework ha abbracciato i **React Server Components (RSC)**, uno dei cambiamenti più significativi nell'ecosistema React degli ultimi anni. I Server Components girano esclusivamente sul server. Non vengono mai idratati nel browser. Possono accedere direttamente a database, filesystem o API interne senza esporre nulla al client.
 
 ```tsx
@@ -195,6 +197,8 @@ Questo si traduce in metriche eccellenti: Time to First Byte (TTFB) basso, Large
 Il risultato finale è HTML puro, niente JavaScript, tienilo a mente.
 
 ### Islands Architecture
+
+![Architettura Islands di Astro](images/astro-islands-architecture.png)
 
 La vera innovazione di Astro non è il rendering statico in sé, altri framework lo fanno da anni. Il vero "segreto" è il modello con cui gestisce le parti interattive: le **Islands**.
 
@@ -415,6 +419,8 @@ export default async function LandingPage() {
 Nota l'opzione `{ next: { revalidate: 3600 } }`: è un'estensione di Next.js all'API `fetch` nativa che attiva l'**Incremental Static Regeneration**. I dati vengono cachati e rigenerati in background ogni ora, senza dover fare un nuovo fetch a ogni richiesta.
 
 ### Il punto di differenza
+
+![Confronto idratazione Astro vs Next.js](images/hydration-comparison.png)
 
 Guardando i due esempi fianco a fianco, la logica di fetch è sorprendentemente simile: in entrambi i casi il codice gira sul server, i dati arrivano al browser come HTML, e nessuna chiave API viene esposta al client.
 

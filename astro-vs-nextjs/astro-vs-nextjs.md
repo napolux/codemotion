@@ -158,8 +158,6 @@ npx create-next-app@latest my-app
 
 La CLI ti chiede se vuoi TypeScript, ESLint e la struttura con `src/` directory... Tutte opzioni che puoi accettare o rifiutare. In pochi secondi hai un progetto funzionante con App Router, dev server con hot reload e tutto il necessario per iniziare a costruire.
 
----
-
 ## Astro: meno JavaScript, più performance
 
 Astro nasce nel 2021 con un'idea precisa e radicale:
@@ -289,8 +287,6 @@ Il routing funziona esattamente come in Next.js: è **file-based**. Un file `src
 Se hai già usato il Pages Router di Next.js, ti sentirai subito a casa. La differenza è che Next.js ha poi introdotto l'App Router, con le cartelle `app/` e i file speciali `page.tsx`, `layout.tsx`, `loading.tsx`, aggiungendo potenza ma anche complessità. 
 
 Astro resta sul modello più semplice: un file, una rotta, nessuna convenzione da imparare.
-
----
 
 ## Confronto diretto: una pagina marketing
 

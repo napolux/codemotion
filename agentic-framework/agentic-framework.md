@@ -35,6 +35,8 @@ Riguarda quanto è facile, per un agente AI:
 
 L'ADX non è il contrario di DX: ne è una derivata, se vogliamo usare termini matematici... Le caratteristiche che rendono un codice leggibile da un umano competente (convenzioni stabili, dipendenze esplicite, tipi end-to-end, side effect localizzati) sono le stesse che lo rendono manipolabile da un LLM. **Ma con una differenza di scala**: quando il codice viene generato in massa, anche piccole ambiguità si amplificano in errori enormi e poco controllabili.
 
+![DX vs ADX](images/dx-vs-adx.png)
+
 Sicuramente l'avete visto succedere: partite da una richiesta semplice tipo "creami un hook React" e dopo 20 minuti siete persi in test, linter che non passano e "spaghetti code" indecifrabile
 
 I framework moderni stanno reagendo a questa pressione in modo abbastanza coerente: file-based routing, server components, typed routing... Sono tutte risposte allo stesso problema: ridurre la variabilità dell'output. Far sì che, per un dato intento, esista un *piccolo numero di soluzioni plausibili*, possibilmente una sola.
@@ -53,6 +55,8 @@ Ogni domanda ammette molte risposte tecnicamente equivalenti ma cognitivamente o
 Un framework opinionato risponde a queste domande prima ancora che vengano poste. Riduce la varianza. Comprime lo spazio delle decisioni. Per un team umano questo è ergonomia. Per un agente AI è qualcosa di più cruciale: è la condizione perché il suo output sia **verificabile**.
 
 Ripetiamolo come un mantra: **un LLM non "comprende" il codice nel senso forte del termine**. Un LLM ragiona su pattern, su distribuzioni statistiche di token, su strutture sintattiche apprese durante il training. Un LLM funziona meglio dove le strutture sono più rappresentate e più stabili. 
+
+![Compressione cognitiva](images/compressione-cognitiva.png)
 
 Un App Router di Next.js, con la sua gerarchia `app/[segment]/page.tsx`, è facile da rappresentare per un modello: a un percorso URL corrisponde un file, a un layout corrisponde un altro file, a un loading state un altro ancora. Una SPA React con `react-router` configurato a mano in un `App.tsx`, con lazy import sparsi e provider annidati, richiede al modello di ricostruire una mappa che il framework ha rifiutato di imporre. Il primo caso è leggibile. Il secondo va interpretato.
 

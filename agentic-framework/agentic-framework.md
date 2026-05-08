@@ -10,13 +10,13 @@ length: ~5.500 parole
 ## Convenzioni, compiler intelligence e server boundaries non sono dettagli ergonomici: sono la nuova interfaccia tra le codebase e gli agenti AI che ci lavorano dentro.
 
 
-Lo so, lo so... **La domanda, così formulata, è davvero provocatoria**. Implica che esista una soglia oltre la quale gli agenti AI rendono superflua le astrazioni che chiamiamo "framework". Inoltre, la domanda implica che la storia recente di React, Next.js, Angular, Svelte, Astro, Solid e compagnia bella sia la storia di strumenti pensati per umani che ora dovrebbero farsi da parte. 
+Lo so, lo so... **La domanda, così formulata, è davvero provocatoria**. Implica che esista una soglia oltre la quale gli agenti AI rendono superflua le astrazioni che chiamiamo "framework". Inoltre, la domanda implica che la storia recente di [React](https://react.dev), [Next.js](https://nextjs.org), [Angular](https://angular.dev), [Svelte](https://svelte.dev), [Astro](https://astro.build), [Solid](https://solidjs.com) e compagnia bella sia la storia di strumenti pensati per umani che ora dovrebbero farsi da parte. 
 
 È un framing comodo per produrre titoli, e quasi inutile per capire cosa stia davvero succedendo nell'ecosistema JavaScript.
 
 Fatta questa doverosa premessa, togliamoci il cappellino di stagnola e cominciamo ad osservare che quello che sta accadendo è più interessante che spettacolare. I framework non stanno arretrando. **Stanno cambiando interlocutore**. Per quindici anni hanno ottimizzato un'unica metrica, la *Developer Experience*, perché il loro utilizzatore principale era un essere umano davanti a un IDE. 
 
-**Da circa due anni questa premessa ha smesso di essere vera**. Una quota crescente del codice che entra in produzione viene generata, modificata o orchestrata da un agente AI: Cursor, Claude Code, GitHub Copilot, Devin, Windsurf, quello che preferite. L'utilizzatore del framework non è più solo un umano. È un sistema software con i suoi limiti, i suoi bias, e le sue "preferenze" (se così vogliamo chiamarle).
+**Da circa due anni questa premessa ha smesso di essere vera**. Una quota crescente del codice che entra in produzione viene generata, modificata o orchestrata da un agente AI: [Cursor](https://cursor.com), [Claude Code](https://claude.ai/code), [GitHub Copilot](https://github.com/features/copilot), [Devin](https://devin.ai), [Windsurf](https://windsurf.com), quello che preferite. L'utilizzatore del framework non è più solo un umano. È un sistema software con i suoi limiti, i suoi bias, e le sue "preferenze" (se così vogliamo chiamarle).
 
 I framework che sopravvivranno ai prossimi cinque anni sono quelli che stanno ridisegnando le proprie convenzioni *anche* per questo nuovo utilizzatore. Non devono sostituire l'umano ma devono far lavorare l'agente AI e l'umano *insieme*. Il punto centrale di questo articolo è che il framework, nell'era agentica, smette di essere una "comodità per chi scrive" e diventa qualcosa di strutturalmente diverso: uno **strato di compressione cognitiva** tra l'intento (umano o agente) e la macchina.
 
@@ -63,7 +63,7 @@ Un App Router di Next.js, con la sua gerarchia `app/[segment]/page.tsx`, è faci
 Ora che abbiamo chiarito cosa sia l'ADX e perché sia utile, possiamo analizzare le cinque caratteristiche stanno emergendo come pattern comuni nei framework adatti all'era agentica.
 
 ### File-based conventions comprensibili senza documentazione
-Next.js App Router, Nuxt, SvelteKit, SolidStart, Astro, Qwik City, TanStack Start: tutti convergono su filesystem dove la posizione del file è essa stessa informazione. Questo non è un dettaglio estetico. È un'API leggibile da chi non ha letto il manuale (umano o macchina che sia). Una codebase con `app/dashboard/[id]/page.tsx` e `app/dashboard/[id]/layout.tsx` racconta la propria architettura senza bisogno di un file README.
+Next.js App Router, [Nuxt](https://nuxt.com), [SvelteKit](https://kit.svelte.dev), [SolidStart](https://start.solidjs.com), Astro, [Qwik City](https://qwik.dev), [TanStack Start](https://tanstack.com/start): tutti convergono su filesystem dove la posizione del file è essa stessa informazione. Questo non è un dettaglio estetico. È un'API leggibile da chi non ha letto il manuale (umano o macchina che sia). Una codebase con `app/dashboard/[id]/page.tsx` e `app/dashboard/[id]/layout.tsx` racconta la propria architettura senza bisogno di un file README.
 
 ### Reattività esplicita, non magica
 I compiler-first framework (come Svelte) hanno un vantaggio strutturale: il codice scritto ha una traduzione formale, deterministica, in qualcosa che l'analisi statica può manipolare. Le runes di Svelte 5 e i signals di Solid e Angular sono modelli di reattività *dichiarativi*: non dipendono dall'ordine di chiamata di una funzione (come gli hook React) o da regole di linting per essere corretti. Per un LLM che deve modificare la reattività di un componente, la differenza è enorme. Una closure stale in un `useEffect` è un bug classico che gli agenti continuano a produrre. Una rune dichiarata con `$state` è quasi impossibile da sbagliare allo stesso modo. È esattamente questo tipo di prevedibilità che il lavoro sulla *memoization* [sta cercando di recuperare a livello di compilatore](https://react.dev/learn/react-compiler).
@@ -81,7 +81,7 @@ I React Server Components, le Server Actions di Next.js e React Router 7, i load
 Senza questa "dichiarazione", ogni componente è potenzialmente tutto: un agente che genera codice deve indovinare. Con la separazione esplicita, il problema scompare.
 
 ### Metadata strutturati e introspezione
-[Astro Content Collections con schema Zod](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod), frontmatter tipizzato, manifesti di build, route manifest... Sono tutti modi di esporre la struttura dell'app in un formato machine-readable. Su questo si innesta MCP, il Model Context Protocol che sta diventando lo standard di fatto per esporre contesto e capability agli agenti. Un MCP server che pubblica le rotte, i layout e le server functions di un'app Next.js è la differenza tra un agente che fa `grep` e un agente che fa `query`.
+[Astro Content Collections con schema Zod](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod), frontmatter tipizzato, manifesti di build, route manifest... Sono tutti modi di esporre la struttura dell'app in un formato machine-readable. Su questo si innesta MCP, il [Model Context Protocol](https://modelcontextprotocol.io) che sta diventando lo standard di fatto per esporre contesto e capability agli agenti. Un MCP server che pubblica le rotte, i layout e le server functions di un'app Next.js è la differenza tra un agente che fa `grep` e un agente che fa `query`.
 
 ## Framework per framework, senza tifo
 
@@ -196,7 +196,7 @@ Pochi misteri runtime, convenzioni rigorose, errori del compiler chiari: se l'ec
 
 ### Vue / Nuxt
 
-Vue e Nuxt occupano la nicchia "boring is beautiful": convenzioni solide, ecosistema maturo, niente svolte epocali. Per molti team è esattamente quello che serve.
+[Vue](https://vuejs.org) e Nuxt occupano la nicchia "boring is beautiful": convenzioni solide, ecosistema maturo, niente svolte epocali. Per molti team è esattamente quello che serve.
 
 ```vue
 <!-- pages/users.vue -->
